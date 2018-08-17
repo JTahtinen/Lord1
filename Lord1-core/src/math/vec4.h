@@ -34,8 +34,8 @@ namespace Lord1 { namespace math {
 		Vec4& operator+=(const Vec4& other);
 		Vec4& operator-=(const Vec4& other);
 		Vec4& operator*=(float scalar);
-		bool operator==(const Vec4& other);
-		bool operator!=(const Vec4& other);
+		bool operator==(const Vec4& other) const;
+		bool operator!=(const Vec4& other) const;
 		Vec4& operator=(const Vec2& other);
 		Vec4& operator=(const Vec3& other);
 

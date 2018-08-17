@@ -39,8 +39,8 @@ public:
 	Vec3& operator+=(const Vec3& other);
 	Vec3& operator-=(const Vec3& other);
 	Vec3& operator*=(float scalar);
-	bool operator==(const Vec3& other);
-	bool operator!=(const Vec3& other);
+	bool operator==(const Vec3& other) const;
+	bool operator!=(const Vec3& other) const;
 };
 
 }}

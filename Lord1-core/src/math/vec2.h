@@ -37,8 +37,8 @@ namespace Lord1 { namespace math {
 		Vec2& operator+=(const Vec2& other);
 		Vec2& operator-=(const Vec2& other);
 		Vec2& operator*=(float scalar);
-		bool operator==(const Vec2& other);
-		bool operator!=(const Vec2& other);
+		bool operator==(const Vec2& other) const;
+		bool operator!=(const Vec2& other) const;
 	};
 
 }}

@@ -131,12 +131,12 @@ namespace Lord1 { namespace math {
 		return mul(scalar);
 	}
 
-	bool Vec4::operator==(const Vec4& other)
+	bool Vec4::operator==(const Vec4& other) const
 	{
 		return (x == other.x && y == other.y && z == other.z && w == other.w);
 	}
 
-	bool Vec4::operator!=(const Vec4& other)
+	bool Vec4::operator!=(const Vec4& other) const
 	{
 		return !(*this == other);
 	}

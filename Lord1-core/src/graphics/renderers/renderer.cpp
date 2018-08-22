@@ -1,9 +1,9 @@
 #include "renderer.h"
 #include <iostream>
 #include <glew.h>
-#include "../defs.h"
+#include "../../defs.h"
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	Renderer::Renderer()
 		: _numMeshes(0)

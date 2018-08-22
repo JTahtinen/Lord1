@@ -1,7 +1,10 @@
 #include "vertexbufferlayout.h"
-#include "../defs.h"
+#include "../../defs.h"
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
+
+	VertexBufferLayout VertexBufferLayout::defaultPositionLayout;
+	VertexBufferLayout VertexBufferLayout::defaultColorLayout;
 
 	VertexBufferLayout::VertexBufferLayout()
 		: _stride(0)

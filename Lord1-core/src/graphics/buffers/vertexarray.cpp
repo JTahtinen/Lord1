@@ -1,8 +1,8 @@
 #include "vertexarray.h"
 #include <iostream>
-#include "../defs.h"
+#include "../../defs.h"
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	VertexArray::VertexArray()
 		: _numAttributes(0)

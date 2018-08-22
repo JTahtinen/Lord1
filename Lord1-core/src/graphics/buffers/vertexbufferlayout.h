@@ -2,7 +2,7 @@
 #include <glew.h>
 #include <vector>
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 		struct VertexBufferElement
 	{
@@ -21,6 +21,9 @@ namespace Lord1 { namespace graphics {
 		void push(unsigned int count);
 		const std::vector<VertexBufferElement>& getElements() const;
 		inline unsigned int getStride() const { return _stride; }
+
+		static VertexBufferLayout defaultPositionLayout;
+		static VertexBufferLayout defaultColorLayout;
 	};
 
 }}

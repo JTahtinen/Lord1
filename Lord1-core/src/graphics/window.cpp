@@ -2,7 +2,7 @@
 #include "glew.h"
 #include <iostream>
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	Window::Window(int width, int height, const char* title)
 		: _width(width)
@@ -29,7 +29,7 @@ namespace Lord1 { namespace graphics {
 		
 		_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 		_glContext = SDL_GL_CreateContext(_window);
-		SDL_GL_SetSwapInterval(1);
+	//	SDL_GL_SetSwapInterval(1);
 		GLenum status = glewInit();
 		
 		if (status != GLEW_OK)

@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include "../math/mat4.h"
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	class Shader
 	{

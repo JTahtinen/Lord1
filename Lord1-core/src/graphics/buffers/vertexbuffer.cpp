@@ -1,9 +1,9 @@
 #include "vertexbuffer.h"
 #include "vertexbufferlayout.h"
-#include "../defs.h"
+#include "../../defs.h"
 #include <iostream>
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	VertexBuffer::VertexBuffer(const void* data, unsigned int size, VertexBufferLayout* layout)
 		: _layout(layout)
@@ -11,6 +11,11 @@ namespace Lord1 { namespace graphics {
 		GLCALL(glGenBuffers(1, &_vbo));
 		bind();
 		GLCALL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
+	}
+
+	VertexBuffer::~VertexBuffer()
+	{
+		GLCALL(glDeleteBuffers(1, &_vbo));
 	}
 
 	void VertexBuffer::bind() const

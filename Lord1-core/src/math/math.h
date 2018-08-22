@@ -4,7 +4,7 @@
 #include "vec3.h"
 #include "vec4.h"
 
-namespace Lord1 { namespace math {
+namespace lord { namespace math {
 
 #define MATH_PI 3.14159f
 

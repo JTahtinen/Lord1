@@ -1,9 +1,9 @@
 #include "indexbuffer.h"
 #include <glew.h>
-#include "../defs.h"
+#include "../../defs.h"
 #include "vertexbufferlayout.h"
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	IndexBuffer::IndexBuffer(const std::vector<unsigned int>& indices)
 	{
@@ -11,6 +11,11 @@ namespace Lord1 { namespace graphics {
 		GLCALL(glGenBuffers(1, &_ibo));
 		bind();
 		GLCALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, _count * getSizeOfType(GL_UNSIGNED_INT), &indices[0], GL_STATIC_DRAW));
+	}
+
+	IndexBuffer::~IndexBuffer()
+	{
+		GLCALL(glDeleteBuffers(1, &_ibo));
 	}
 
 	void IndexBuffer::bind() const

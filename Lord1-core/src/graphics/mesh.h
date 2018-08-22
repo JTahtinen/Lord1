@@ -1,11 +1,11 @@
 #pragma once
-#include "vertexarray.h"
-#include "indexbuffer.h"
+#include "buffers/vertexarray.h"
+#include "buffers/indexbuffer.h"
 #include "../math/vec4.h"
 #include "../math/vec2.h"
 #include <vector>
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	class Vertex
 	{
@@ -35,8 +35,7 @@ namespace Lord1 { namespace graphics {
 		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
 		const VertexArray* getVertexArray() const { return &_vao; }
 		
-		static VertexBufferLayout default2DLayout;
-		static VertexBufferLayout defaultColorLayout;
+
 	};
 
 }}

@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 	}
 	else
 	{
-		Lord1::Application app("Lord engine");
+		lord::Application app("Lord engine");
 		app.run();
 	}
 	std::cout << "Press enter to continue..." << std::endl;

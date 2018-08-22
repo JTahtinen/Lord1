@@ -3,7 +3,7 @@
 #include "../defs.h"
 
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	Shader::Shader(GLuint id)
 		: _id(id)
@@ -62,7 +62,7 @@ namespace Lord1 { namespace graphics {
 
 	void Shader::setUniform3f(const std::string& u_name, float v0, float v1, float v2)
 	{
-		glUniform3f(getUniformLocation(u_name), v0, v2, v2);
+		glUniform3f(getUniformLocation(u_name), v0, v1, v2);
 	}
 
 	void Shader::setUniform4f(const std::string& u_name, float v0, float v1, float v2, float v3)
@@ -72,7 +72,7 @@ namespace Lord1 { namespace graphics {
 
 	void Shader::setUniformMat4(const std::string& u_name, math::Matrix4f& matrix)
 	{
-		glUniformMatrix4fv(getUniformLocation(u_name), 1, false, &matrix[0]);
+		glUniformMatrix4fv(getUniformLocation(u_name), 1, GL_TRUE, &matrix[0]);
 	}
 
 	GLuint Shader::loadShader(const std::string& filename, GLenum type)
@@ -88,6 +88,26 @@ namespace Lord1 { namespace graphics {
 		const char* shaderstring = shaderfile.c_str();
 		GLCALL(glShaderSource(shader, 1, &shaderstring, NULL));
 		GLCALL(glCompileShader(shader));
+
+		GLint errorResult;
+		GLCALL(glGetShaderiv(shader, GL_COMPILE_STATUS, &errorResult));
+		if (errorResult == GL_FALSE)
+		{
+			GLchar error[1024] = { 0 };
+			std::string typeString;
+			if (type == GL_VERTEX_SHADER)
+			{
+				typeString = "vertex ";
+			}
+			else
+			{
+				typeString = "fragment ";
+			}
+			std::cout << "[ERROR] Could not compile " << typeString << "shader!" << std::endl;
+			GLCALL(glGetProgramInfoLog(shader, sizeof(error), NULL, error));
+			std::cerr << error << std::endl;
+		}
+	
 		return shader;
 	}
 }}

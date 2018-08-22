@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-namespace Lord1 { namespace math {
+namespace lord { namespace math {
 
 class Vec3
 {

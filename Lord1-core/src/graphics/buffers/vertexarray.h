@@ -4,7 +4,7 @@
 #include "indexbuffer.h"
 #include <vector>
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 class VertexArray
 {

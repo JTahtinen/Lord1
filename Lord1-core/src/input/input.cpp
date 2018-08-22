@@ -1,6 +1,6 @@
 #include "input.h"
 
-namespace Lord1 { namespace input {
+namespace lord { namespace input {
 
 	Input::Input()
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "vec4.h"
 #include <iostream>
-namespace Lord1 { namespace math {
+namespace lord { namespace math {
 
 class Matrix4f
 {
@@ -11,10 +11,10 @@ public:
 	Vec4 mul(const Vec4& other) const;
 	Matrix4f mul(const Matrix4f& other) const;
 	static Matrix4f identity();
-	static Matrix4f perspective(float fovX, float fovY, float zNear, float zFar);
-	static Matrix4f translation(const Vec4& translator);
-	static Matrix4f scale(const Vec4& scaler);
-	static Matrix4f ortho(float left, float right, float top, float bottom, float far, float near);
+	static Matrix4f perspective(float fov, float aspect, float zNear, float zFar);
+	static Matrix4f translate(const Vec3& translator);
+	static Matrix4f scale(const Vec3& scalar);
+	static Matrix4f ortho(float left, float right, float top, float bottom, float near, float far);
 
 	inline float get(int row, int column) const
 	{

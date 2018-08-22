@@ -1,9 +1,9 @@
 #pragma once
 #include <array>
-#include "vertexarray.h"
-#include "mesh.h"
+#include "../buffers/vertexarray.h"
+#include "../mesh.h"
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	const int MAX_RENDERABLES = 50;
 

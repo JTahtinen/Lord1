@@ -3,7 +3,7 @@
 #include "vec2.h"
 #include "vec3.h"
 
-namespace Lord1 { namespace math {
+namespace lord { namespace math {
 
 	Vec4::Vec4(float x, float y, float z, float w)
 		: x(x)

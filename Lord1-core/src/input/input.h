@@ -2,7 +2,7 @@
 
 #include <SDL.h>
 
-namespace Lord1 { namespace input {
+namespace lord { namespace input {
 
 	enum Key
 	{

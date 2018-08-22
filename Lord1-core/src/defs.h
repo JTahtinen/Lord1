@@ -7,7 +7,7 @@
 x;\
 ASSERT(GLLogCall())
 
-namespace Lord1
+namespace lord
 {
 
 	unsigned inline int getSizeOfType(unsigned int type)

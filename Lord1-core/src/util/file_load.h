@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace Lord1 { namespace util {
+namespace lord { namespace util {
 
 	inline std::string load_file(const std::string& filename)
 	{

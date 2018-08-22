@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	class IndexBuffer
 	{
@@ -8,6 +8,7 @@ namespace Lord1 { namespace graphics {
 		unsigned int		_count;
 	public:
 		IndexBuffer(const std::vector<unsigned int>& indices);
+		~IndexBuffer();
 		void bind() const;
 		inline unsigned int getCount() const { return _count; }
 		inline unsigned int getIbo() const { return _ibo; }

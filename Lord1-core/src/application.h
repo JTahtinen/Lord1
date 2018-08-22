@@ -1,7 +1,7 @@
 #pragma once
 #include "graphics\window.h"
 
-namespace Lord1 {
+namespace lord {
 
 	using namespace graphics;
 

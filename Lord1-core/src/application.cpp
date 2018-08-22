@@ -4,18 +4,18 @@
 #include <iostream>
 #include <glew.h>
 #include "util\file_load.h"
-#include "graphics\vertexarray.h"
-#include "graphics\vertexbuffer.h"
+#include "graphics\buffers\vertexarray.h"
+#include "graphics\buffers\vertexbuffer.h"
 #include "graphics\shader.h"
-#include "graphics\renderer.h"
-#include "graphics\indexbuffer.h"
+#include "graphics/renderers/renderer.h"
+#include "graphics\buffers\indexbuffer.h"
 #include "graphics\mesh.h"
 #include "math\vec4.h"
 #include "math\vec2.h"
 #include "math\mat4.h"
 #include "math\math.h"
-
-namespace Lord1
+#include "graphics/renderers/simple2drenderer.h"
+namespace lord
 {
 	Application::Application(const char* title)
 		: _window(1920, 1080, title)
@@ -33,6 +33,8 @@ namespace Lord1
 		using namespace math;
 		bool running = true;
 
+		float aspect = (float)_window.getWidth() / (float)_window.getHeight();
+
 		Vec4 p1(0, 0, 0, 0);
 		Vec4 p2(2.0f, 3.0f, 1.5, 0.5);
 	
@@ -41,16 +43,18 @@ namespace Lord1
 		//GL TEST DATA
 
 		float fov = 70.0f;
-		Matrix4f perspective = Matrix4f::perspective(TO_RADIANS(fov), TO_RADIANS(fov / 16.0f * 9.0f), 0.1f, 200.0f);
-		Matrix4f ortho = Matrix4f::ortho(-1.0f, 1.0f, 1.0f, -1.0f, 200.0f, 0.1f);
-		Matrix4f translation = Matrix4f::translation(Vec4(0, 0, -1.0f, 0));
+		Matrix4f perspective = Matrix4f::perspective(fov, aspect, 0.1f, 200.0f);
+		Matrix4f ortho = Matrix4f::ortho(-1.0f, 1.0f, (1.0f / aspect), -(1.0f / aspect), 0.1f, 200.0f);
+		Matrix4f model = Matrix4f::translate(Vec3(0, 0, -2.0f));
 
 		Renderer renderer;
 		// DATA 
 		//------------------------------------------------------------------
 		Vec4 vertices[] = {
-			Vec4(-0.5f, -0.5f, -2.0f, 1.0f), Vec4(0.0f, 0.5f, -2.0f, 1.0f), Vec4(0.5f, -0.5f,  -2.0f, 1.0f),
-			Vec4(-0.2f, 0.8f,  -2.3f, 1.0f), Vec4(0.0f, 0.8f, -2.6f, 1.0f), Vec4(-0.9f, -0.9f, -3.0f, 1.0f)
+			Vec4(-0.5f, -0.5f, -0.5f, 1.0f), Vec4(-0.5f, 0.5f, -0.5f, 1.0f),
+			Vec4(0.5f, 0.5f, -0.5f, 1.0f), Vec4(0.5f, -0.5f, -0.5f, 1.0f),
+
+			Vec4(-0.5f, -0.5f, 0.5f, 1.0f), Vec4(0.5f, -0.5f, 0.5f, 1.0f)
 		};
 
 		Vec4 verticesB[] = {
@@ -59,7 +63,7 @@ namespace Lord1
 		Vec4 colors[] = {Vec4(1, 0, 1, 1), Vec4(0, 0, 1, 1), Vec4(0.5f, 0.9f, 0.65f, 1),
 			Vec4(1, 0, 0, 1), Vec4(1, 0, 1, 1), Vec4(0, 0.5f, 0, 1) };
 
-		unsigned int indices[] = { 0, 1, 2, 3, 4, 5 };
+		unsigned int indices[] = { 0, 1, 2, 2, 0, 3, 3, 0, 4, 4, 3, 5 };
 		unsigned int indicesB[] = { 0, 1, 2 };
 		// ----------------------------------------------
 
@@ -81,7 +85,7 @@ namespace Lord1
 		}
 
 		std::vector<unsigned int> indexList;
-		for (unsigned int i = 0; i < 6; ++i)
+		for (unsigned int i = 0; i < 12; ++i)
 		{
 			indexList.push_back(indices[i]);
 		}
@@ -97,37 +101,26 @@ namespace Lord1
 
 		Shader* shader = Shader::generateShader("res/shaders/basic");
 		shader->bind();
-		shader->setUniformMat4("u_mvp", translation * perspective);
 
-	/*	
-		glGetShaderiv(vertexshader, GL_COMPILE_STATUS, &result);
-		if (result == GL_FALSE)
-		{
-			GLchar error[1024] = { 0 };
-			std::cout << "could not compile vertexshader!" << std::endl;
-			glGetProgramInfoLog(vertexshader, sizeof(error), NULL, error);
-			std::cerr << error << std::endl;
-		}
-		glGetShaderiv(fragmentshader, GL_COMPILE_STATUS, &result);
-		if (result == GL_FALSE)
-		{
-			std::cout << "could not compile fragmentshader!" << std::endl;
-		}	
-*/
 		//-----
 		
 		Input& input = Input::instance();
 		bool add = false;
-		float z = -1.0f;
+		float z = -2.0f;
 		float x = 0.0f;
 		Matrix4f* projection = &ortho;
+
+		Renderable2D sprite(Vec2(-0.5f, -0.2f), Vec2(0.2f, 0.4f), shader);
+		Simple2DRenderer simple2DRenderer(_window);
+		Renderer2D* renderer2D = &simple2DRenderer;
+		
 		while (running)
 		{
-			translation = Matrix4f::translation(Vec4(x, 0, z, 0.0f));
-			shader->setUniformMat4("u_mvp", *projection * translation);
+			model = Matrix4f::translate(Vec3(x, 0, z));
 			renderer.push(&mesh);
 			if (add)
 			renderer.push(&meshB);
+			renderer2D->submit(&sprite);
 			input.update();
 			if (input.poll(KEY_T)) z += 0.01f;
 			if (input.poll(KEY_G)) z -= 0.01f;
@@ -135,12 +128,12 @@ namespace Lord1
 			if (input.poll(KEY_H)) x -= 0.01f;
 			if (input.poll(KEY_O))
 			{
-				fov += 0.01f; perspective = Matrix4f::perspective(TO_RADIANS(fov), TO_RADIANS(fov), 0.1f, 200.0f); 
+				fov += 0.1f; perspective = Matrix4f::perspective(fov, aspect, 0.1f, 200.0f);
 				std::cout << "Fov: " << fov << std::endl;
 			}
 			if (input.poll(KEY_I)) 
 			{ 
-				fov -= 0.01f; perspective = Matrix4f::perspective(TO_RADIANS(fov), TO_RADIANS(fov), 0.1f, 200.0f); 
+				fov -= 0.1f; perspective = Matrix4f::perspective(fov, aspect, 0.1f, 200.0f);
 				std::cout << "Fov: " << fov << std::endl;
 			}
 			if (input.poll(KEY_M, KEYSTATE_TYPED))
@@ -156,14 +149,16 @@ namespace Lord1
 			}
 			if (input.poll(KEY_ESCAPE))	running = false;
 			if (input.poll(KEY_A, KEYSTATE_TYPED)) add = !add;
+			shader->setUniformMat4("u_mvp", *projection * model);
 			renderer.render();
+			simple2DRenderer.flush();
 			_window.update();
 		}
 	}
 
 	void Application::initEngine()
 	{
-		Mesh::default2DLayout.push<float>(4);
-		Mesh::defaultColorLayout.push<float>(4);
+		VertexBufferLayout::defaultPositionLayout.push<float>(4);
+		VertexBufferLayout::defaultColorLayout.push<float>(4);
 	}
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL.h>
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
 	class Window
 	{

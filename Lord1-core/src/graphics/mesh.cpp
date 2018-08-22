@@ -1,11 +1,10 @@
 #include "mesh.h"
-#include "vertexbuffer.h"
+#include "buffers/vertexbuffer.h"
 #include <iostream>
 
-namespace Lord1 { namespace graphics {
+namespace lord { namespace graphics {
 
-	VertexBufferLayout Mesh::default2DLayout;
-	VertexBufferLayout Mesh::defaultColorLayout;
+
 
 	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
 	{
@@ -22,8 +21,8 @@ namespace Lord1 { namespace graphics {
 			colors[i] = vertices[i].color;
 		}
 
-		VertexBuffer* positionBuffer = VertexBuffer::genVertexBuffer(positions, count * sizeof(Vec4), &Mesh::default2DLayout);
-		VertexBuffer* colorBuffer = VertexBuffer::genVertexBuffer(colors, count * sizeof(Vec4), &Mesh::defaultColorLayout);
+		VertexBuffer* positionBuffer = VertexBuffer::genVertexBuffer(positions, count * sizeof(Vec4), &VertexBufferLayout::defaultPositionLayout);
+		VertexBuffer* colorBuffer = VertexBuffer::genVertexBuffer(colors, count * sizeof(Vec4), &VertexBufferLayout::defaultColorLayout);
 		
 		_vao.push(positionBuffer);
 		_vao.push(colorBuffer);

@@ -52,7 +52,7 @@ namespace lord { namespace math {
 		};
 	}
 
-	Matrix4f Matrix4f::perspective(float fov, float aspect, float near, float far)
+	Matrix4f Matrix4f::projection(float fov, float aspect, float near, float far)
 	{
 		float fovRad = TO_RADIANS(fov);
 		return Matrix4f{

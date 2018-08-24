@@ -1,5 +1,6 @@
 #include "mesh.h"
 #include "buffers/vertexbuffer.h"
+
 #include <iostream>
 
 namespace lord { namespace graphics {
@@ -17,7 +18,7 @@ namespace lord { namespace graphics {
 
 		for (unsigned int i = 0; i < count; ++i)
 		{
-			positions[i] = vertices[i].pos;
+			positions[i] = vertices[i].position;
 			colors[i] = vertices[i].color;
 		}
 
@@ -33,7 +34,7 @@ namespace lord { namespace graphics {
 
 	void VertexData::push(const Vertex& vertex)
 	{
-		_positions.push_back(vertex.pos);
+		_positions.push_back(vertex.position);
 		_colors.push_back(vertex.color);
 	}
 	void VertexData::push(const std::vector<Vertex>& vertices)

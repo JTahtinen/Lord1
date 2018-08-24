@@ -2,19 +2,17 @@
 #include "buffers/vertexarray.h"
 #include "shader.h"
 #include "../math/math.h"
+#include "vertex.h"
 
 namespace lord { namespace graphics {
-
-	using namespace math;
-class Renderable2D
-{
-public:
-	VertexArray vao;
-	Vec3 position;
-	Vec2 size;
-	Shader* shader;
-public:
-	Renderable2D(const Vec2& position, const Vec2& size, Shader* shader);
-};
+	
+	class Renderable2D
+	{
+	public:
+		Vertex vertex;
+		math::Vec2 size;
+	public:
+		Renderable2D(const math::Vec2& position, const math::Vec2& size);
+	};
 
 }}

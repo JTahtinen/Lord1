@@ -11,6 +11,7 @@ namespace lord { namespace graphics {
 	public:
 		~VertexBuffer();
 		void bind() const;
+		void unbind() const;
 		inline GLuint getBuffer() const { return _vbo; }
 		inline VertexBufferLayout* getLayout() const { return _layout; }
 		static VertexBuffer* genVertexBuffer(const void* data, unsigned int size, VertexBufferLayout* layout);

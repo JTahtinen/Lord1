@@ -10,6 +10,7 @@ namespace lord { namespace graphics {
 		IndexBuffer(const std::vector<unsigned int>& indices);
 		~IndexBuffer();
 		void bind() const;
+		void unbind() const;
 		inline unsigned int getCount() const { return _count; }
 		inline unsigned int getIbo() const { return _ibo; }
 	};

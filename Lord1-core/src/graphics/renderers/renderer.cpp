@@ -21,7 +21,6 @@ namespace lord { namespace graphics {
 
 	void Renderer::render()
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
 		for (unsigned int i = 0; i < _numMeshes; ++i)
 		{
 			auto* vao = _meshes[i]->getVertexArray();

@@ -19,6 +19,7 @@ public:
 	void setIndices(const std::vector<unsigned int>& indices);
 	inline const IndexBuffer* getIndexBuffer() const { return _ibo; }
 	void bind() const;
+	void unbind() const;
 };
 
 }}

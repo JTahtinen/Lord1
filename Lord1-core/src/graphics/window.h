@@ -13,6 +13,7 @@ namespace lord { namespace graphics {
 		~Window();
 		inline int getWidth() const { return _width; }
 		inline int getHeight() const { return _height; }
+		void clear();
 		void update();
 	};
 } }

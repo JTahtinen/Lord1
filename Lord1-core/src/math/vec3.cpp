@@ -23,6 +23,13 @@ namespace lord { namespace math {
 		return *this;
 	}
 
+	Vec3& Vec3::add(const Vec2& other)
+	{
+		x += other.x;
+		y += other.y;
+		return *this;
+	}
+
 	Vec3& Vec3::add(float x, float y, float z)
 	{
 		this->x += x;
@@ -36,6 +43,13 @@ namespace lord { namespace math {
 		this->x -= other.x;
 		this->y -= other.y;
 		this->z -= other.z;
+		return *this;
+	}
+
+	Vec3& Vec3::sub(const Vec2& other)
+	{
+		this->x -= other.x;
+		this->y -= other.y;
 		return *this;
 	}
 
@@ -99,9 +113,19 @@ namespace lord { namespace math {
 		return Vec3(x + other.x, y + other.y, z + other.z);
 	}
 
+	Vec3 Vec3::operator+(const Vec2& other) const
+	{
+		return Vec3(x + other.x, y + other.y, z);
+	}
+
 	Vec3 Vec3::operator-(const Vec3& other) const
 	{
 		return Vec3(x - other.x, y - other.y, z - other.z);
+	}
+
+	Vec3 Vec3::operator-(const Vec2& other) const
+	{
+		return Vec3(x - other.x, y - other.y, z);
 	}
 
 	float Vec3::operator*(const Vec3& other) const
@@ -119,7 +143,17 @@ namespace lord { namespace math {
 		return add(other);
 	}
 
+	Vec3& Vec3::operator+=(const Vec2& other)
+	{
+		return add(other);
+	}
+
 	Vec3& Vec3::operator-=(const Vec3& other)
+	{
+		return sub(other);
+	}
+
+	Vec3& Vec3::operator-=(const Vec2& other)
 	{
 		return sub(other);
 	}

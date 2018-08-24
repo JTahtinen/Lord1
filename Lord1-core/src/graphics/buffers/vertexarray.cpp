@@ -56,4 +56,9 @@ namespace lord { namespace graphics {
 		GLCALL(glBindVertexArray(_vao));
 	}
 
+	void VertexArray::unbind() const
+	{
+		GLCALL(glBindVertexArray(0));
+	}
+
 }}

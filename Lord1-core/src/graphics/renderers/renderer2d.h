@@ -12,8 +12,9 @@ public:
 	Renderer2D(const Window& win)
 	{
 		float aspect = (float)win.getWidth() / (float)win.getHeight();
-		_projection = Matrix4f::ortho(-1.0f, 1.0f, (1.0f / aspect), -(1.0f / aspect), 0, 200.0f);
+		_projection = math::Matrix4f::ortho(-1.0f, 1.0f, (1.0f / aspect), -(1.0f / aspect), 0, 200.0f);
 	}
+	virtual ~Renderer2D() {};
 	virtual void submit(Renderable2D* renderable) = 0;
 	virtual void flush() = 0;
 };

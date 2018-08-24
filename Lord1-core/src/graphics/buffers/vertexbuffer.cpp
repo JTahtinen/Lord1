@@ -23,6 +23,11 @@ namespace lord { namespace graphics {
 		GLCALL(glBindBuffer(GL_ARRAY_BUFFER, _vbo));
 	}
 
+	void VertexBuffer::unbind() const
+	{
+		GLCALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
+	}
+
 	VertexBuffer* VertexBuffer::genVertexBuffer(const void* data, unsigned int size, VertexBufferLayout* layout)
 	{
 		if (!data || !layout)

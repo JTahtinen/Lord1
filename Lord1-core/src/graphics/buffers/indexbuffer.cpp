@@ -22,4 +22,9 @@ namespace lord { namespace graphics {
 	{
 		GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo));
 	}
+
+	void IndexBuffer::unbind() const
+	{
+		GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+	}
 }}

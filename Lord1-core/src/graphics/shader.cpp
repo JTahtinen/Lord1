@@ -104,7 +104,7 @@ namespace lord { namespace graphics {
 				typeString = "fragment ";
 			}
 			std::cout << "[ERROR] Could not compile " << typeString << "shader!" << std::endl;
-			GLCALL(glGetProgramInfoLog(shader, sizeof(error), NULL, error));
+			GLCALL(glGetProgramInfoLog(shader, sizeof(error), NULL, &error[0]));
 			std::cerr << error << std::endl;
 		}
 	

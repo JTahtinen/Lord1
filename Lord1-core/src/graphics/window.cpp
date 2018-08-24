@@ -44,6 +44,12 @@ namespace lord { namespace graphics {
 		SDL_DestroyWindow(_window);
 	}
 
+	void Window::clear()
+	{
+		glClearColor(0, 0.2f, 0.5f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
 	void Window::update()
 	{
 		SDL_GL_SwapWindow(_window);

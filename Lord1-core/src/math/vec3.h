@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "vec2.h"
 
 namespace lord { namespace math {
 
@@ -14,9 +15,12 @@ public:
 	Vec3(float x, float y, float z);
 	Vec3();
 	Vec3& add(const Vec3& other);
+	Vec3& add(const Vec2& other);
 	Vec3& add(float x, float y, float z);
 	Vec3& sub(const Vec3& other);
+	Vec3& sub(const Vec2& other);
 	Vec3& sub(float x, float y, float z);
+
 	Vec3& mul(float scalar);
 	float length() const;
 	Vec3& normalize();
@@ -33,11 +37,15 @@ public:
 	}
 
 	Vec3 operator+(const Vec3& other) const;
+	Vec3 operator+(const Vec2& other) const;
 	Vec3 operator-(const Vec3& other) const;
+	Vec3 operator-(const Vec2& other) const;
 	float operator*(const Vec3& other) const;
 	Vec3 operator*(float scalar) const;
 	Vec3& operator+=(const Vec3& other);
+	Vec3& operator+=(const Vec2& other);
 	Vec3& operator-=(const Vec3& other);
+	Vec3& operator-=(const Vec2& other);
 	Vec3& operator*=(float scalar);
 	bool operator==(const Vec3& other) const;
 	bool operator!=(const Vec3& other) const;

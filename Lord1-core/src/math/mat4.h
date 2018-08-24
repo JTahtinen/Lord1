@@ -11,7 +11,7 @@ public:
 	Vec4 mul(const Vec4& other) const;
 	Matrix4f mul(const Matrix4f& other) const;
 	static Matrix4f identity();
-	static Matrix4f perspective(float fov, float aspect, float zNear, float zFar);
+	static Matrix4f projection(float fov, float aspect, float zNear, float zFar);
 	static Matrix4f translate(const Vec3& translator);
 	static Matrix4f scale(const Vec3& scalar);
 	static Matrix4f ortho(float left, float right, float top, float bottom, float near, float far);
